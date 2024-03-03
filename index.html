@@ -5,25 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RPS Tournament</title>
     <link rel="stylesheet" href="assets/style/rpsStyle.css">
+    <script src="assets/script/rps.js" defer></script>
 </head>
 <body>
     <div class="whiteContainer">
         <h1> R.P.S. TOURNAMENT</h1>
         <div class="betContainer">
-            <div id="playerPick"> <img class="bets" src="assets/image/rock.png" alt="player bet"></div>
-            <p id="vs"> vs </p>
-            <div id="comPick"> <img class="bets right" src="assets/image/rock.png" alt="Computer bet"></div>
+            <div id="playerPick"> <img class="bets left" src="assets/image/unknown.gif" alt="player bet"></div>
+            <div> <button id="vs"> vs </button></div> 
+            <div id="comPick"> <img class="bets right" src="assets/image/unknown.gif" alt="Computer bet"></div>
         </div>
         <div id="interactZone">
-            <div class="instructions">
-                <p id="rounds"> Round 1 </p>
-                <p> Place your bet:</p>
+            <div class="default">
+                <div class="instructions">
+                    <p id="rounds"> Round 1 </p>
+                    <p> Press VS to LOCK IN ur bet </p>
+                </div>
+                <div class="choiceContainer">
+                    <button class='choice' id="rock" value="rock"> ROCK </button>
+                    <button class='choice' id="paper" value="paper"> PAPER </button>
+                    <button class='choice' id="scissors" value="scissors"> SCISSORS </button>
+                </div>
             </div>
-            <div class="choiceContainer">
-                <button id="rock"> ROCK </button>
-                <button id="paper"> PAPER </button>
-                <button id="scissors"> SCISSORS </button>
+            <div class="results">
             </div>
+            
         </div>
     </div>
 </body>

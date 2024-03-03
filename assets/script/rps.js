@@ -1,32 +1,13 @@
-{/*
-    <div class="whiteContainer">
-        <h1> R.P.S. TOURNAMENT</h1>
-        <div class="betContainer">
-            <div id="playerPick"> <img class="bets left" src="assets/image/rock.png" alt="player bet"></div>
-            <div> <button id="vs"> vs </button></div> 
-            <div id="comPick"> <img class="bets right" src="assets/image/rock.png" alt="Computer bet"></div>
-        </div>
-        <div id="interactZone">
-            <div class="instructions">
-                <p id="rounds"> Round 1 </p>
-                <p> Press VS to LOCK IN ur bet </p>
-            </div>
-            <div class="choiceContainer">
-                <button class='choice' id="rock" value="rock"> ROCK </button>
-                <button class='choice' id="paper" value="paper"> PAPER </button>
-                <button class='choice' id="scissors" value="scissors"> SCISSORS </button>
-            </div>
-        </div>
-    </div>
-*/}
-
 const allChoices = document.querySelectorAll('.choice');
 const lockinBtn = document.getElementById('vs');
 let playerChoice = '';
-lockinBtn.addEventListener('click', lockIn);
-
 const leftpickture = document.querySelector(".bets.left");
 const rightpickture = document.querySelector(".bets.right");
+const selectionPage = document.querySelector(".default");
+const resultsPage = document.querySelector(".results");
+
+// Event Listeners
+lockinBtn.addEventListener('click', lockIn);
 
 // Lock in functions
 function lockIn(){
@@ -44,11 +25,25 @@ function lockIn(){
 
 // Display results
 function display_results(results){
-    console.log(results.announcement)
-    console.log("winner: " + results.winner)
+    console.log(results.announcement);
+    console.log("winner: " + results.winner);
+    let displayResult = document.createElement('p');
+    displayResult.textContent = results.announcement;
+    displayResult.setAttribute('id', 'resultAnnounce');
+    let displayWinner = document.createElement('p');
+    results.winner = results.winner.toUpperCase();
+    displayWinner.textContent = "WINNER: " + results.winner;
+    displayWinner.setAttribute('id', 'winnerAnnounce');
+    let tryAgainBtn = document.createElement('button');
+    tryAgainBtn.textContent = 'TRY AGAIN';
+    tryAgainBtn.setAttribute('id', 'tryAgain');
+    resultsPage.appendChild(displayResult);
+    resultsPage.appendChild(displayWinner);
+    resultsPage.appendChild(tryAgainBtn);
+    selectionPage.style.cssText = "display: none";
+    resultsPage.style.cssText = "display: block"
+
 }
-
-
 
 
 
