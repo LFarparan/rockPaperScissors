@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+}
+
+body{
+    background-color: rgb(246, 246, 246);
+}
+
+.whiteContainer {
+    background-color: white;
+    width: 800px;
+    margin: auto;
+    margin-top: 30px;
+    padding: 50px;
+    border-radius: 50px;
+    border: .5px solid rgb(209, 209, 209);
+    box-shadow: 5px 5px rgb(212, 212, 212);
+}
+
+h1 {
+    text-align: center;
+    color: rgb(81, 81, 81);
+}
+
+.betContainer {
+    display: flex;
+    justify-content: space-around;
+    margin: 50px 0px;
+}
+
+#playerPick,
+#comPick{
+    width: 300px;
+    height: 220px;
+    border-radius: 50px;
+}
+
+.bets {
+    width: 290px;
+    height: 215px;
+}
+
+.bets.right{
+    transform: scaleX(-1);
+}
+
+#vs{
+    color: gray;
+    margin-top: 70px;
+    font-size: 50px;
+}
+
+#interactZone {
+    border: 2px solid gray;
+    width: 710px;
+    height: 175px;
+}
+
+.instructions {
+    color: rgb(88, 88, 88);
+    margin: auto;
+    text-align: center;
+}  
+
+#rounds {
+    font-size: 35px;
+}
+
+.choiceContainer {
+    display: flex;
+    margin: 30px;
+    justify-content: space-between;
+}
+
+button{
+    width: 200px;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 10px;
+}
+
+#rock {
+    background-color: rgb(83, 255, 129);
+}
+
+#paper {
+    background-color: rgb(83, 209, 255);
+}
+
+#scissors {
+    background-color: rgb(255, 186, 83);
+}
+
+
+
+
+
+

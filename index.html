@@ -3,23 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissors</title>
+    <title>RPS Tournament</title>
+    <link rel="stylesheet" href="assets/style/rpsStyle.css">
 </head>
 <body>
     <div class="whiteContainer">
-        <h1 class="title"> R.P.S. TOURNAMENT</h1>
+        <h1> R.P.S. TOURNAMENT</h1>
         <div class="betContainer">
-            <div id="playerPick"> <img src="assets/image/rock.png" alt="player bet"></div>
-            <div id="ComPick"> <img src="assets/image/rock.png" alt="Computer bet"></div>
+            <div id="playerPick"> <img class="bets" src="assets/image/rock.png" alt="player bet"></div>
+            <p id="vs"> vs </p>
+            <div id="comPick"> <img class="bets right" src="assets/image/rock.png" alt="Computer bet"></div>
         </div>
-        <div class="instructions">
-            <p id="rounds"> Round 1 </p>
-            <p> Place Your Bets:</p>
-        </div>
-        <div class="choiceContainer">
-            <button id="rock"> Rock </button>
-            <button id="paper"> Paper </button>
-            <button id="scissors"> Scissors </button>
+        <div id="interactZone">
+            <div class="instructions">
+                <p id="rounds"> Round 1 </p>
+                <p> Place your bet:</p>
+            </div>
+            <div class="choiceContainer">
+                <button id="rock"> ROCK </button>
+                <button id="paper"> PAPER </button>
+                <button id="scissors"> SCISSORS </button>
+            </div>
         </div>
     </div>
 </body>
