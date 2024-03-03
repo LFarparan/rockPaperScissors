@@ -1,13 +1,17 @@
 const allChoices = document.querySelectorAll('.choice');
 const lockinBtn = document.getElementById('vs');
-let playerChoice = '';
 const leftpickture = document.querySelector(".bets.left");
 const rightpickture = document.querySelector(".bets.right");
 const selectionPage = document.querySelector(".default");
 const resultsPage = document.querySelector(".results");
+const rockbtn = document.getElementById('rock');
+const paperbtn = document.getElementById('paper');
+const scissorsbtn = document.getElementById('scissors');
+let playerChoice = '';
 
 // Event Listeners
 lockinBtn.addEventListener('click', lockIn);
+
 
 // Lock in functions
 function lockIn(){
@@ -23,38 +27,12 @@ function lockIn(){
         alert('Pick your bet first before you LOCK IN')
 }
 
-// Display results
-function display_results(results){
-    console.log(results.announcement);
-    console.log("winner: " + results.winner);
-    let displayResult = document.createElement('p');
-    displayResult.textContent = results.announcement;
-    displayResult.setAttribute('id', 'resultAnnounce');
-    let displayWinner = document.createElement('p');
-    results.winner = results.winner.toUpperCase();
-    displayWinner.textContent = "WINNER: " + results.winner;
-    displayWinner.setAttribute('id', 'winnerAnnounce');
-    let tryAgainBtn = document.createElement('button');
-    tryAgainBtn.textContent = 'TRY AGAIN';
-    tryAgainBtn.setAttribute('id', 'tryAgain');
-    resultsPage.appendChild(displayResult);
-    resultsPage.appendChild(displayWinner);
-    resultsPage.appendChild(tryAgainBtn);
-    selectionPage.style.cssText = "display: none";
-    resultsPage.style.cssText = "display: block"
-
-}
-
-
 
 // Selecting Player Choice
 allChoices.forEach(btn => {
     btn.addEventListener('click', (e) => {
         playerChoice = e.target.value;
         console.log("You hover: " + playerChoice);
-        const rockbtn = document.getElementById('rock');
-        const paperbtn = document.getElementById('paper');
-        const scissorsbtn = document.getElementById('scissors');
 
         if (playerChoice == 'rock'){
             rockbtn.style.cssText = "background-color: gray;";
@@ -67,7 +45,6 @@ allChoices.forEach(btn => {
             paperbtn.style.cssText = "background-color: gray";
             scissorsbtn.style.cssText = "background-color: rgb(255, 186, 83)";
             leftpickture.src = "assets/image/paper.png";
-
         }
         else if (playerChoice == 'scissors'){
             rockbtn.style.cssText = "background-color: rgb(83, 255, 129);";
@@ -91,12 +68,10 @@ function getComChoice(){
     }
     else if (comChoice == 'paper'){
         rightpickture.src = "assets/image/paper.png";
-
     }
-    else (comChoice == 'scissors')
+    else if (comChoice == 'scissors')
         rightpickture.src = "assets/image/scissors.png";
     return comChoice;
-
 }
 
 
@@ -113,4 +88,49 @@ function winnerCheck (playerSelection, computerSelection){
      playerSelection + " is an invalid bet";
     let whoWin = (verdict.includes('You Win')) ? "player" : (verdict.includes('You Lose')) ? "computer" : "draw";
     return {announcement:verdict, winner: whoWin}
+}
+
+// Display results
+function display_results(results){
+    console.log(results.announcement);
+    console.log("winner: " + results.winner);
+
+    let displayResult = document.createElement('p');
+    displayResult.textContent = results.announcement;
+    displayResult.setAttribute('id', 'resultAnnounce');
+    let displayWinner = document.createElement('p');
+    results.winner = results.winner.toUpperCase();
+    displayWinner.textContent = "WINNER: " + results.winner;
+    displayWinner.setAttribute('id', 'winnerAnnounce');
+    let tryAgainBtn = document.createElement('button');
+    tryAgainBtn.textContent = 'TRY AGAIN';
+    tryAgainBtn.setAttribute('id', 'tryAgain');
+
+    resultsPage.appendChild(displayResult);
+    resultsPage.appendChild(displayWinner);
+    resultsPage.appendChild(tryAgainBtn);
+    selectionPage.style.cssText = "display: none";
+    resultsPage.style.cssText = "display: block";
+    const tryAgain = document.getElementById('tryAgain')
+    tryAgain.addEventListener('click', resetPage);
+}
+
+function resetPage(){
+    selectionPage.style.cssText = "display: block";
+    resultsPage.style.cssText = "display: none";
+    playerChoice = '';
+
+    leftpickture.src = "assets/image/unknown.gif";
+    rightpickture.src = "assets/image/unknown.gif";
+    rockbtn.style.cssText = "background-color: rgb(83, 255, 129);";
+    paperbtn.style.cssText = "background-color: rgb(83, 209, 255)";
+    scissorsbtn.style.cssText = "background-color: rgb(255, 186, 83)";
+    
+    const delResult = document.getElementById('resultAnnounce');
+    const delWinner = document.getElementById('winnerAnnounce');
+    const delTryAgain = document.getElementById('tryAgain');
+    delResult.remove();
+    delTryAgain.remove();
+    delWinner.remove();
+
 }
