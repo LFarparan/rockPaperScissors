@@ -7,10 +7,30 @@ const resultsPage = document.querySelector(".results");
 const rockbtn = document.getElementById('rock');
 const paperbtn = document.getElementById('paper');
 const scissorsbtn = document.getElementById('scissors');
+const roundView = document.getElementById('rounds');
+
 let playerChoice = '';
+let tally = '';
+let playerScore = 0;
+let comScore = 0;
+let round = 1;
+
+
+displayRound(roundView, round);
 
 // Event Listeners
 lockinBtn.addEventListener('click', lockIn);
+
+
+// Display round number
+function displayRound() {
+    if (round == 6){
+        getTally()
+    }
+    else
+        roundView.textContent = "Round " + round;
+    round++;
+}
 
 
 // Lock in functions
@@ -20,7 +40,6 @@ function lockIn(){
         console.log("player: " + playerChoice);
         console.log("computer: " + comChoice);
         let results = winnerCheck(playerChoice, comChoice);
-        console.log(results);
         display_results(results);
     }
     else
@@ -86,7 +105,16 @@ function winnerCheck (playerSelection, computerSelection){
      (playerSelection == 'paper' && computerSelection == 'scissors') ?  "You pick " +playerSelection+ " against " +computerSelection+ ", You Lose!":
      (playerSelection == 'paper' && computerSelection == 'rock') ?  "You pick " +playerSelection+ " against " +computerSelection+ ", You Win!!":
      playerSelection + " is an invalid bet";
-    let whoWin = (verdict.includes('You Win')) ? "player" : (verdict.includes('You Lose')) ? "computer" : "draw";
+    let whoWin = (verdict.includes('You Win')) ? "player" : 
+        (verdict.includes('You Lose')) ? "computer" : 
+        "draw";
+    if (whoWin == 'player'){
+        playerScore++;
+    }
+    else if(whoWin == 'computer'){
+        comScore++;
+    }
+    console.log("Player: " + playerScore + "    Computer: " + comScore);
     return {announcement:verdict, winner: whoWin}
 }
 
@@ -94,21 +122,36 @@ function winnerCheck (playerSelection, computerSelection){
 function display_results(results){
     console.log(results.announcement);
     console.log("winner: " + results.winner);
-
     let displayResult = document.createElement('p');
     displayResult.textContent = results.announcement;
     displayResult.setAttribute('id', 'resultAnnounce');
     let displayWinner = document.createElement('p');
     results.winner = results.winner.toUpperCase();
-    displayWinner.textContent = "WINNER: " + results.winner;
+    displayWinner.textContent = "PLAYER: " + playerScore + " | COMPUTER: " + comScore;
     displayWinner.setAttribute('id', 'winnerAnnounce');
-    let tryAgainBtn = document.createElement('button');
-    tryAgainBtn.textContent = 'TRY AGAIN';
-    tryAgainBtn.setAttribute('id', 'tryAgain');
-
     resultsPage.appendChild(displayResult);
     resultsPage.appendChild(displayWinner);
-    resultsPage.appendChild(tryAgainBtn);
+    displayRound();
+
+    let tryAgainBtn = document.createElement('button');
+    if (tally != ''){
+        tryAgainBtn.textContent = tally;
+        playerScore = 0;
+        comScore = 0;
+        round = 1;
+        displayRound();
+        console.log(tally);
+        tryAgainBtn.setAttribute('id', 'tryAgain');
+        tryAgainBtn.style.cssText= "background-color: rgb(220, 149, 255)"
+        resultsPage.appendChild(tryAgainBtn);
+        tally='';
+    }
+    else{
+        tryAgainBtn.textContent = 'TRY AGAIN';
+        tryAgainBtn.setAttribute('id', 'tryAgain');
+        resultsPage.appendChild(tryAgainBtn);
+    }
+        
     selectionPage.style.cssText = "display: none";
     resultsPage.style.cssText = "display: block";
     const tryAgain = document.getElementById('tryAgain')
@@ -132,5 +175,10 @@ function resetPage(){
     delResult.remove();
     delTryAgain.remove();
     delWinner.remove();
+}
 
+function getTally(){
+    tally = (playerScore > comScore) ? "You Beat em AI" : 
+    (playerScore < comScore) ? "AI Supremacy" : 
+    "Its a Draw"
 }
